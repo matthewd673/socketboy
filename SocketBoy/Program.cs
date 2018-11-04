@@ -20,8 +20,7 @@ namespace SocketBoy
         {
 
             speak("Hello, my name is SocketBoy :)");
-            speak("I'm here to fix your horrible server.");
-            speak("/help for help");
+            speak("I'm here to fix your horrible server!");
 
             bool abort = false;
             bool connected = false;
@@ -50,6 +49,7 @@ namespace SocketBoy
                 {
                     client = null;
                     clientStream = null;
+                    speak("Disconnected from server");
                 }
                 else if (input == "/quit")
                 {
@@ -76,7 +76,7 @@ namespace SocketBoy
 
             }
 
-            Console.WriteLine("Bye");
+            speak("Goodbye!");
             Console.ReadKey();
 
         }
@@ -90,6 +90,8 @@ namespace SocketBoy
             if (ip.Contains(":"))
             {
                 pureIp = ip.Split(':')[0];
+                if (pureIp == "")
+                    pureIp = "localhost"; //just a quick shortcut
                 port = Convert.ToInt32(ip.Split(':')[1]);
             }
 
