@@ -19,13 +19,27 @@ namespace SocketBoy
         static void Main(string[] args)
         {
 
-            speak("Hello, my name is SocketBoy :)");
-            speak("I'm here to fix your horrible server!");
+            //set up the title
+            Output.updateTitle(clientConnection: "[no client]");
 
-            bool abort = false;
-            bool connected = false;
-            
+            speak("SocketBoy :)");
+            Console.WriteLine("");
+
+            ClientManager manager = new ClientManager();
+            Parser parser = new Parser(manager);
+
+            //manage incoming responses
+            //new Thread(() => manager.readResponses()).Start();
+
+            while(true)
+            {
+                //accept and parse input
+                String input = Console.ReadLine();
+                parser.parse(input);
+            }
+
             //loop until closed
+            /*
             while(!abort)
             {
 
@@ -75,7 +89,7 @@ namespace SocketBoy
                 }
 
             }
-
+            */
             speak("Goodbye!");
             Console.ReadKey();
 
