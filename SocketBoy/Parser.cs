@@ -13,6 +13,8 @@ namespace SocketBoy
 
         ClientManager manager;
 
+        bool inLoop = false;
+
         public Parser(ClientManager clientManager)
         {
             manager = clientManager;
@@ -76,6 +78,7 @@ namespace SocketBoy
                             String scriptContents = File.ReadAllText(filename);
                             Parser scriptParser = new Parser(manager);
                             scriptParser.parse(scriptContents, true);
+                            Output.speak("Script execution completed");
                         }
                         else
                             Output.error("Specified script file does not exist");
@@ -93,10 +96,12 @@ namespace SocketBoy
                 */
                 else if (input == "/help")
                 {
-                    Output.speak("SocketBoy Commands:");
+                    Output.speak("SocketBoy commands:");
                     Output.speak("/connect [ip address] - connect to a server, port defaults to 80 if none is specified");
                     Output.speak("/disconnect - disconnect from server");
                     Output.speak("/greet [optional: id] - sends client's id to server");
+                    Output.speak("/wait [time] - waits for the specified time before continuing script");
+                    Output.speak("/load [filename] - loads and executes specified script");
                     Output.speak("If you are connected to a server, type a message with no command to send it");
                 }
                 else
